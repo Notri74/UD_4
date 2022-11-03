@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Users List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let piloto of Pilotos">
+      <ion-card>
+        <ion-avatar>
+          <img
+            *ngIf="piloto.filename"
+            src="http://localhost:8080/images/{{piloto.filename}}"
+            alt="image"
+          />
+        </ion-avatar>
+        <ion-card-header>
+          <ion-card-title
+            >Nombre: {{piloto.nombre}} {{piloto.apellido}}</ion-card-title
+          >
+          <ion-card-subtitle>{{piloto.numero}}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content> Escudería: {{piloto.escuderia}} </ion-card-content>
+      </ion-card>
+
+      <div class="item-note" item-end>
+        <button ion-button clear [routerLink]="['/update/', piloto.id]">
+          <ion-icon name="create" style="zoom: 1.5"></ion-icon>
+        </button>
+        <button ion-button clear (click)="removePiloto(piloto.id)">
+          <ion-icon name="trash" style="zoom: 1.5"></ion-icon>
+        </button>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addPiloto()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
